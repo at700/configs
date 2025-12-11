@@ -1,0 +1,41 @@
+#---- Include /etc/ssh/sshd_config.d
+Include /etc/ssh/sshd_config.d/*.conf
+
+#---- Basic settings
+Port 22
+
+#---- SFTP
+Subsystem       sftp    internal-sftp
+#Subsystem      sftp    /usr/lib/openssh/sftp-server
+
+#---- Encryption
+Ciphers chacha20-poly1305@openssh.com
+MACs umac-128-etm@openssh.com
+KexAlgorithms curve25519-sha256@libssh.org
+
+#---- Forwarding and tunneling
+X11Forwarding no
+PermitTunnel yes
+AllowTcpForwarding yes
+AllowAgentForwarding yes
+
+#---- Authentication
+UsePAM no
+PasswordAuthentication no
+PubkeyAuthentication no
+#AuthenticationMethods publickey password
+
+#---- Security
+PermitRootLogin no
+
+#---- Rules
+#-- Allow a user
+#Match User aman
+#       PasswordAuthentication yes
+#       PubkeyAuthentication yes
+#       AuthenticationMethods publickey password
+#-- Allow a subnet
+#Match Address 10.11.11.0/24
+#       PasswordAuthentication yes
+#       PubkeyAuthentication yes
+#       AuthenticationMethods publickey password
