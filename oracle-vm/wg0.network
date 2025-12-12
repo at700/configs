@@ -1,0 +1,5 @@
+[Match]
+Name=wg0
+
+[Network]
+Address=10.66.66.1/24
