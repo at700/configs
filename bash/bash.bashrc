@@ -73,14 +73,23 @@ fi
 PROMPT_COMMAND="history -a; echo"
 
 #---- Aliases
-alias grep="grep --color=auto"
-alias ls="ls --color=auto"
-alias ll="ls -lh --color=auto"
-alias la="ls -A --color=auto"
-alias lla="ls -lAh --color=auto"
-alias l="ls -CF --color=auto"
+alias grep="grep --color=always"
+alias ls="\ls --color=always"
+alias ll="\ls -lh --color=always"
+alias la="\ls -A --color=always"
+alias lla="\ls -lAh --color=always"
+alias l="\ls -CF --color=always"
 alias tree="tree -C"
 alias watch="watch -ct"
+
+#---- WSL specific aliases
+if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+  alias ls="\ls --color=always 2>/dev/null | grep -vE '\?|\$RECYCLE\.BIN|System Volume Information'"
+  alias ll="\ls -lh --color=always 2>/dev/null | grep -vE '\?|\$RECYCLE\.BIN|System Volume Information'"
+  alias la="\ls -A --color=always 2>/dev/null | grep -vE '\?|\$RECYCLE\.BIN|System Volume Information'"
+  alias lla="\ls -lAh --color=always 2>/dev/null | grep -vE '\?|\$RECYCLE\.BIN|System Volume Information'"
+  alias l="\ls -CF --color=always 2>/dev/null | grep -vE '\?|\$RECYCLE\.BIN|System Volume Information'"
+fi
 
 #---- Functions
 rcopy() {
